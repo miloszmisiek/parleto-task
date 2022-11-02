@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "af42abefb766e975f7680f10368735353569fb4fe0114e59496a7202658362fc"
+            "sha256": "de3895e6ebe80d38f7d75b706a1b182b9afb21ffde24cb3d197059bbdf1612bd"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,6 +39,14 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==0.4.3"
+        },
+        "webstack-django-sorting": {
+            "hashes": [
+                "sha256:0b2df87a027dab7ac357a31cce1e2211e50fe900f77690b1833b0b52fa043d1e",
+                "sha256:e0fdd10952547549494db79cb3d0fe6cdd579f611259167d8c21412082d56161"
+            ],
+            "index": "pypi",
+            "version": "==2.2.1"
         }
     },
     "develop": {}
