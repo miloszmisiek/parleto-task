@@ -1,8 +1,10 @@
+{% load query_extra %}
+
 <div class="pagination">
     <span class="pagination__nav">
         {% if page_obj.has_previous %}
-            <a href="?page=1&sort={{sort}}&dir={{dir}}">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}&sort={{sort}}&dir={{dir}}">previous</a>
+            <a href="?{% query_transform page=1 %}">&laquo; first</a>
+            <a href="?{% query_transform page=page_obj.previous_page_number %}">previous</a>
         {% endif %}
 
         <span class="current">
@@ -10,8 +12,8 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}&sort={{sort}}&dir={{dir}}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}&sort={{sort}}&dir={{dir}}">last &raquo;</a>
+            <a href="?{% query_transform page=page_obj.next_page_number %}">next</a>
+            <a href="?{% query_transform page=page_obj.paginator.num_pages %}">last &raquo;</a>
         {% endif %}
     </span>
 </div>

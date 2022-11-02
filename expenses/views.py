@@ -17,10 +17,13 @@ class ExpenseListView(ListView):
         if form.is_valid():
             name = form.cleaned_data.get('name', '').strip()
             date = form.cleaned_data.get('date')
+            categories = form.cleaned_data.get('category_filter')
             if name:
                 queryset = queryset.filter(name__icontains=name)
             if date:
                 queryset = queryset.filter(date=date)
+            if categories:
+                queryset = queryset.filter(category__in=categories)
 
         if sort:
             if sort == "date":
