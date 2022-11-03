@@ -1,3 +1,7 @@
+"""
+code comes from https://stackoverflow.com/questions/46026268/pagination-and-get-parameters
+"""
+
 from django import template
 
 register = template.Library()

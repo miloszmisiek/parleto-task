@@ -1,8 +1,9 @@
 from django.views.generic.list import ListView
 
+from django.db.models import Count
 from .forms import ExpenseSearchForm
 from .models import Expense, Category
-from .reports import summary_per_category
+from .reports import summary_per_category, total_amount, summary_per_year_month
 
 
 class ExpenseListView(ListView):
@@ -41,6 +42,8 @@ class ExpenseListView(ListView):
             form=form,
             object_list=queryset,
             summary_per_category=summary_per_category(queryset),
+            total_amount=total_amount(queryset),
+            summary_per_year_month=summary_per_year_month(queryset),
             sort=sort,
             dir=dir,
             **kwargs)
@@ -49,3 +52,11 @@ class ExpenseListView(ListView):
 class CategoryListView(ListView):
     model = Category
     paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        queryset = object_list if object_list is not None else self.object_list
+
+        return super().get_context_data(
+            object_list=queryset
+            .annotate(no_expenses=Count('expense')),
+            **kwargs)

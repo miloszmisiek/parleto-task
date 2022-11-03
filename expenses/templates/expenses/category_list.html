@@ -8,6 +8,7 @@
 		<tr>
 			<th>name</th>
 			<th>actions</th>
+			<th>no. of expenses</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -17,10 +18,13 @@
 				{{obj.name}}
 			</td>
 			<td>
+				<a href="{% url 'expenses:category-edit' obj.id %}">edit</a>
 				<a href="{% url 'expenses:category-delete' obj.id %}">delete</a>
 			</td>
+			<td>{{obj.no_expenses}}</td>
 		</tr>
 		{% endfor %}
 	</tbody>
 </table>
+
 {% endblock %}

@@ -9,7 +9,6 @@ class ExpenseSearchForm(forms.ModelForm):
         fields = ('name', 'date', 'category_filter',)
         widgets = {
             'date': forms.widgets.DateInput(attrs={'type': 'date'}),
-            'category_filter': forms.CheckboxSelectMultiple,
         }
 
     def __init__(self, *args, **kwargs):

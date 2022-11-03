@@ -8,6 +8,7 @@
 <form method="get" action="">
   {{form.as_p}}
   <button type="submit">search</button>
+  <button type="reset">reset</button>
 </form>
 
 <br>
@@ -47,15 +48,42 @@
 
 {% include "_pagination.html" %}
 <hr>
+
 <table border="1">
-  <caption>Summary per category</caption>
-  <tr>
-    {% for category, total in summary_per_category.items %}
 	<tr>
-		<td>{{category}}:</td>
-		<td>{{total|floatformat:2}}</td>
+	  <tr>
+		  <td><strong>Total amount spent:</strong></td>
+		  <td>{{total_amount.total|floatformat:2}}</td>
+	  </tr>
 	</tr>
-	{% endfor %}
-  </tr>
-</table>
+  </table>
+  <br>
+
+  <table style="display: inline-block; " border="1">
+	<caption>Summary per year-month</caption>
+	<tr>
+		{% for date, total in summary_per_year_month.items %}
+		<tr>
+			<td>{{date|date:"Y-M"}}</td>
+			<td>{{total|floatformat:2}}</td>
+		</tr>
+		{% endfor %}
+	</tr>
+	</table>
+
+	<table style="display: inline-block; margin-left: 1rem;" border="1">
+	<caption>Summary per category</caption>
+	<tr>
+		{% for category, total in summary_per_category.items %}
+		<tr>
+			<td>{{category}}:</td>
+			<td>{{total|floatformat:2}}</td>
+		</tr>
+		{% endfor %}
+	</tr>
+	</table>
+
+
+
+
 {% endblock %}
