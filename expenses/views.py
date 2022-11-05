@@ -17,15 +17,21 @@ class ExpenseListView(ListView):
         form = ExpenseSearchForm(self.request.GET)
         if form.is_valid():
             name = form.cleaned_data.get('name', '').strip()
-            date = form.cleaned_data.get('date')
+            end_date = form.cleaned_data.get('end_date')
+            initial_date = form.cleaned_data.get('initial_date')
             categories = form.cleaned_data.get('category_filter')
             if name:
                 queryset = queryset.filter(name__icontains=name)
-            if date:
-                queryset = queryset.filter(date=date)
+            if end_date or initial_date:
+                if end_date and initial_date:
+                    queryset = queryset.filter(date__range=(initial_date, end_date))
+                else:
+                    if end_date:
+                        queryset = queryset.filter(date__lte=end_date)
+                    if initial_date:
+                        queryset = queryset.filter(date__gte=initial_date)
             if categories:
                 queryset = queryset.filter(category__in=categories)
-
         if sort:
             if sort == "date":
                 if dir == "asc":
